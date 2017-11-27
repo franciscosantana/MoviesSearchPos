@@ -20,34 +20,36 @@
             </div>
             <div style="clear:both"></div>
             <div id="navbar" class="collapse navbar-collapse filtros">
-                <div class="row">
-                		<div class="col-sm-2">
-                			Titulo:
-                		</div>
-                		<div class="col-sm-6">
-                			<input name="titulo"></input>
-                		</div>
-                </div>
-                <div class="row">
-                		<div class="col-sm-2">
-                			Desc:
-                		</div>
-                		<div	 class="col-sm-6">
-                			<input name="desc"></input>
-                		</div>
-                </div>
-                <div class="row">
-                		<div class="col-sm-2">
-                			Desde de:
-                		</div>
-                		<div class="col-sm-6">
-                			<input name="ano"></input>
-                		</div>
-                </div>
-                
-                <div class="row">
-                		<button type="button" class="btn btn-success">Buscar</button>
-                </div>
+            		<form action="/consulta" method="GET">
+	                <div class="row">
+	                		<div class="col-sm-2">
+	                			Titulo:
+	                		</div>
+	                		<div class="col-sm-6">
+	                			<input name="titulo"></input>
+	                		</div>
+	                </div>
+	                <div class="row">
+	                		<div class="col-sm-2">
+	                			Desc:
+	                		</div>
+	                		<div	 class="col-sm-6">
+	                			<input name="desc"></input>
+	                		</div>
+	                </div>
+	                <div class="row">
+	                		<div class="col-sm-2">
+	                			Desde de:
+	                		</div>
+	                		<div class="col-sm-6">
+	                			<input name="ano"></input>
+	                		</div>
+	                </div>
+	                
+	                <div class="row">
+	                		<button type="submit" class="btn btn-success">Buscar</button>
+	                </div>
+				</form>
             </div>
         </div>
     </nav>

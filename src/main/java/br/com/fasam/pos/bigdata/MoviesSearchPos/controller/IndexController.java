@@ -10,5 +10,10 @@ public class IndexController {
 	public String index() {
 		return "/index";
 	}
+	
+	@GetMapping("/consulta")
+	public String consulta() {
+		return "/consulta";
+	}
 
 }
