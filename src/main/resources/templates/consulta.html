@@ -6,7 +6,22 @@
     <div th:replace="fragments/header :: header-css"/>
 
 </head>
-<body>
+<script type="text/javascript">
+function init() {
+	navigator.geolocation.getCurrentPosition(
+			(p) => {
+				document.getElementById("lat").value = p.coords.latitude 
+				document.getElementById("lng").value = p.coords.longitude
+			}, 
+			(err) => {console.log(" ee ",err)}, 
+			{
+		   		enableHighAccuracy : true,
+		   		timeout : 60000,
+		   		maximumAge : 0
+		    })
+}
+</script>
+<body onload="init();">
 	<div th:replace="fragments/header :: header"/>
 	
 	<div class="container">
