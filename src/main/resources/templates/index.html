@@ -27,11 +27,31 @@ function init() {
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12" style="text-align: center;">
-				<h1> Filmes em alta </h1>
+				<h1> Top 10 movies </h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+					<table class="table">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">Title</th>
+								<th scope="col">Popularity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<th:block th:each="movie : ${listaFilmes}">
+								<tr>
+									<td th:text="${movie.title}"></td>
+									<td th:text="${movie.popularity}"></td>
+								</tr>
+							</th:block>
+						</tbody>
+					</table>
+					
 			</div>
 		</div>
 	</div>
-	
 	<div th:replace="fragments/footer :: footer"/>
 
 </body>
