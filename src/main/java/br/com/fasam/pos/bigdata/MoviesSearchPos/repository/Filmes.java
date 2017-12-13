@@ -20,10 +20,13 @@ import org.elasticsearch.action.ActionRequestValidationException;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.TransportAddress;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.slf4j.Logger;
@@ -150,7 +153,17 @@ public class Filmes {
 
     public List<Filme> getSearchFilmes(String titulo, String desc, Integer ano) {
         List<Filme> filmes = new ArrayList<>();
-        // Seu código deve vir daqui para baixo
+        SearchResponse searchResponse = client.prepareSearch("movies").
+                setTypes("movie")
+                .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
+                .setQuery(QueryBuilders.termQuery("title", titulo))
+                .setFrom(0).setSize(60).setExplain(true).get();
+        List<SearchHit> searchHits = Arrays.asList(searchResponse.getHits().getHits());
+        searchHits.forEach(
+                hit -> {
+                   filmes.add(JSON.parseObject(hit.getSourceAsString(), Filme.class));
+                }
+        );
 
         return filmes;
     }
