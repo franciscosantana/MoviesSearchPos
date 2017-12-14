@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import br.com.fasam.pos.bigdata.MoviesSearchPos.model.Filme;
-import br.com.fasam.pos.bigdata.MoviesSearchPos.repository.Filmes;
+import br.com.fasam.pos.bigdata.MoviesSearchPos.model.Movie;
+import br.com.fasam.pos.bigdata.MoviesSearchPos.repository.Movies;
 
 @Controller
 public class IndexController {
@@ -17,25 +17,30 @@ public class IndexController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
 	@Autowired
-	private Filmes filmes;
+	private Movies filmes;
 
 	@GetMapping(path = { "/", "/index", "/home" })
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView("/index");
-		List<Filme> topFilmes = filmes.getTopFilmes();
-		mav.addObject("listaFilmes", topFilmes);
+		List<Movie> topFilmes = filmes.findTop10();
+		mav.addObject("movies", topFilmes);
 		
-		logger.info("Passando por index.");
+		logger.info("Index path achieved.");
 
 		return mav;
 	}
 
-	@GetMapping("/consulta")
-	public ModelAndView consulta(@RequestParam("titulo") String titulo, @RequestParam("desc") String desc, @RequestParam("ano") Integer ano) {
-		ModelAndView mav = new ModelAndView("/consulta");
-		List<Filme> findedFilmes = filmes.getSearchFilmes(titulo, desc, ano);
-		mav.addObject("listaFilmes", findedFilmes);
-		System.out.println("Passando por consulta");
+	@GetMapping("/search")
+	public ModelAndView search(@RequestParam("title") String title, @RequestParam("overview") String overview, @RequestParam("year") Integer year) {
+		ModelAndView mav = new ModelAndView("/search");
+		List<Movie> findedFilmes = filmes.findTop10ByFilters(title, overview, year);
+		mav.addObject("movies", findedFilmes);
+		mav.addObject("title", title);
+        mav.addObject("overview", overview);
+        mav.addObject("year", year);
+		
+		logger.debug("Search method achieved.");
+		
 		return mav;
 	}
 

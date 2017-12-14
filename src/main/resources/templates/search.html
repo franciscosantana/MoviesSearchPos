@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Movies Finder</title>
+<title>Movies Finder</title>
 
-    <div th:replace="fragments/header :: header-css"/>
+<div th:replace="fragments/header :: header-css" />
 
 </head>
 <script type="text/javascript">
@@ -22,11 +22,11 @@ function init() {
 }
 </script>
 <body onload="init();">
-	<div th:replace="fragments/header :: header"/>
+	<div th:replace="fragments/header :: header" />
 	
 	<div class="container">
 		<div class="panel panel-default">
-			<div class="panel-heading">Top 10 movies</div>
+			<div class="panel-heading">Top 10 movies search results</div>
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-sm-12">
@@ -53,8 +53,10 @@ function init() {
 			</div>
 		</div>
 	</div>
+
+	<!-- /.container -->
 	
-	<div th:replace="fragments/footer :: footer"/>
+	<div th:replace="fragments/footer :: footer" />
 
 </body>
 </html>
